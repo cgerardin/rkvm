@@ -1,2 +1,16 @@
 [workspace]
 members = ["rkvm-client", "rkvm-server", "rkvm-input", "rkvm-net", "rkvm-certificate-gen"]
+
+[package]
+name = "rkvm"
+version = "0.6.0"
+license = "Github"
+description = "rkvm is a tool for sharing keyboard and mouse across multiple Linux machines. It is based on a client/server architecture, where server is the machine controlling mouse and keyboard and relays events (mouse move, key presses, ...) to clients."
+
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/rkvm-*", dest = "/usr/bin/", mode = "755" },
+    { source = "systemd/rkvm-*.service", dest = "/usr/lib/systemd/system/", mode = "644" },
+    { source = "example/*.toml", dest = "/usr/share/rkvm/examples/", mode = "644" },
+    { source = "example/put-your-pem-files-here", dest = "/etc/rkvm/", mode = "644" }
+]
